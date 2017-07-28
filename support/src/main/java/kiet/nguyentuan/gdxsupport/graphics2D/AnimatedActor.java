@@ -13,6 +13,10 @@ import com.badlogic.gdx.math.MathUtils;
 public class AnimatedActor extends BaseActor {
     public float elapsedTime;
     public Animation anim;
+
+    /**
+     * An actor which has animation.
+     */
     public AnimatedActor()
     {
         super();

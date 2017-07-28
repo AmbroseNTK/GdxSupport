@@ -33,7 +33,7 @@ public class MainMenu extends BaseScreen {
         titleMusic.play();
         BaseActor background=new BaseActor(new Texture(Gdx.files.internal("BalloonPop/background.png")));
         background.addAction(Actions.forever(Actions.sequence(Actions.rotateTo(0.5f,1),Actions.rotateTo(-0.5f,1))));
-        mainStage.addActor(background);
+        addMainActor(background);
 
         BaseActor layout=new BaseActor(new Texture("BalloonPop/Game-layout.png"));
         addUIActor(layout);

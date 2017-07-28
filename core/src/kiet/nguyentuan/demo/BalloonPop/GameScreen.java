@@ -71,9 +71,6 @@ public class GameScreen extends BaseScreen {
         for(int i=0;i<5;i++){
             fartList.add(Gdx.audio.newSound(Gdx.files.internal("BalloonPop/fart-"+i+".wav")));
         }
-
-
-// set up user interface
         BitmapFont font = new BitmapFont();
         Label.LabelStyle style = new Label.LabelStyle( font, Color.GOLD );
         point = 0;
@@ -144,14 +141,14 @@ public class GameScreen extends BaseScreen {
             tip="Please catch a shit";
         lTips.setText( "Tip: " + tip );
 
-        if(point>=300&&point<600 && mPart2==false) {
+        if(point>=300&&point<600 && !mPart2) {
             backgroundMusic.stop();
             backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("BalloonPop/playPart2.mp3"));
             backgroundMusic.setLooping(true);
             backgroundMusic.play();
             mPart2 = true;
         }
-        if(point>=600&&mPart3==false) {
+        if(point>=600&& !mPart3) {
             backgroundMusic.stop();
             backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("BalloonPop/playPart3.mp3"));
             backgroundMusic.setLooping(true);
