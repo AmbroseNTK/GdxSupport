@@ -15,8 +15,13 @@ public class Layer2D extends Stage {
     private String layerName;
     private boolean customShader;
     protected ShaderProgram defaultShader;
+    protected boolean pause;
+    protected boolean hide;
+
     public void init(){
         defaultShader=getBatch().getShader();
+        setPause(false);
+        setHide(false);
     }
     public Layer2D(){
         super();
@@ -48,6 +53,7 @@ public class Layer2D extends Stage {
     public void setShaderProgram(ShaderProgram shaderProgram){
         getBatch().setShader(shaderProgram);
         setCustomShader(true);
+
     }
 
     /**
@@ -57,6 +63,7 @@ public class Layer2D extends Stage {
         setShaderProgram(defaultShader);
         setCustomShader(false);
     }
+
     public ShaderProgram getShader(){
         return getBatch().getShader();
     }
@@ -83,5 +90,21 @@ public class Layer2D extends Stage {
 
     public void setCustomShader(boolean customShader) {
         this.customShader = customShader;
+    }
+
+    public boolean isPause() {
+        return pause;
+    }
+
+    public void setPause(boolean pause) {
+        this.pause = pause;
+    }
+
+    public boolean isHide() {
+        return hide;
+    }
+
+    public void setHide(boolean hide) {
+        this.hide = hide;
     }
 }
