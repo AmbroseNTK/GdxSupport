@@ -21,11 +21,13 @@ public class BaseActor extends Actor{
     public Rectangle boundary;
     public float velocityX;
     public float velocityY;
+    private boolean hide;
     public void init(){
         textureRegion=new TextureRegion();
         boundary=new Rectangle();
         velocityX=0;
         velocityY=0;
+        setHide(false);
     }
     public BaseActor(){
         super();
@@ -63,8 +65,18 @@ public class BaseActor extends Actor{
     public void draw(Batch batch, float parentAlpha) {
         Color c = getColor();
         batch.setColor(c.r, c.g, c.b, c.a);
-        batch.draw(textureRegion, getX(), getY(), getOriginX(), getOriginY(),
-                getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+        if(!isHide()) {
+            batch.draw(textureRegion, getX(), getY(), getOriginX(), getOriginY(),
+                    getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
+        }
 
+    }
+
+    public boolean isHide() {
+        return hide;
+    }
+
+    public void setHide(boolean hide) {
+        this.hide = hide;
     }
 }

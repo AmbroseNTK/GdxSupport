@@ -30,6 +30,8 @@ public abstract class BaseScreen implements Screen, InputProcessor {
     private float totalTime;
 
     private boolean customeShader;
+    private InputMultiplexer inputMultiplexer;
+
     public BaseScreen(Game game){
         this.game=game;
 
@@ -42,8 +44,8 @@ public abstract class BaseScreen implements Screen, InputProcessor {
         mainStage=new Stage(new FitViewport(viewWidth,viewHeight));
         uiStage=new Stage(new FitViewport(viewWidth,viewHeight));
         shaderStage=new Stage(new FitViewport(viewWidth,viewHeight));
-        InputMultiplexer inputMultiplexer=new InputMultiplexer(this,mainStage,uiStage,shaderStage);
-        Gdx.input.setInputProcessor(inputMultiplexer);
+        setInputMultiplexer(new InputMultiplexer(this,mainStage,uiStage,shaderStage));
+        Gdx.input.setInputProcessor(getInputMultiplexer());
         create();
     }
 
@@ -80,14 +82,17 @@ public abstract class BaseScreen implements Screen, InputProcessor {
 
     }
 
-    @Override
-    public void render(float delta) {
+    public void clearScreen(){
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+    }
+    @Override
+    public void render(float delta) {
+        clearScreen();
+        drawUI(delta);
+    }
+    public void drawUI(float delta){
         shaderStage.act(delta);
-
-
         if(customeShader){
             totalTime+=delta;
             if(shaderStage.getBatch().getShader().isCompiled()){
@@ -102,7 +107,6 @@ public abstract class BaseScreen implements Screen, InputProcessor {
             }
         }
         shaderStage.draw();
-
         uiStage.act(delta);
         if(!isPaused()) {
             mainStage.act(delta);
@@ -112,16 +116,20 @@ public abstract class BaseScreen implements Screen, InputProcessor {
         mainStage.draw();
         uiStage.draw();
     }
-
     @Override
     public void resize(int width, int height) {
+       setResize(width,height);
+    }
+    public void setResize(int width, int height){
         mainStage.getViewport().update(width, height, true);
         uiStage.getViewport().update(width, height, true);
         shaderStage.getViewport().update(width,height,true);
         viewWidth=width;
         viewHeight=height;
     }
-
+    public void removeActor(BaseActor actor){
+        uiStage.getActors().removeValue(actor,true);
+    }
     @Override
     public void pause() {
 
@@ -181,5 +189,13 @@ public abstract class BaseScreen implements Screen, InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    public InputMultiplexer getInputMultiplexer() {
+        return inputMultiplexer;
+    }
+
+    public void setInputMultiplexer(InputMultiplexer inputMultiplexer) {
+        this.inputMultiplexer = inputMultiplexer;
     }
 }
