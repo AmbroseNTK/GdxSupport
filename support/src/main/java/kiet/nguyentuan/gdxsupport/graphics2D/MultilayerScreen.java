@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
@@ -45,11 +46,11 @@ public abstract class MultilayerScreen extends BaseScreen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         update(delta);
         for (Layer2D layer2D : layerMap.values()) {
-            if (!isPaused() && !layer2D.isPause())
+            if (!isPaused() && !layer2D.isPause()) {
                 layer2D.act(delta);
+            }
             if (!layer2D.isHide())
                 layer2D.draw();
         }
@@ -142,6 +143,10 @@ public abstract class MultilayerScreen extends BaseScreen {
      * @param layerZ
      */
     public void setInputForLayer(int layerZ) {
+        if(inputMultiplexer==null){
+            inputMultiplexer=new InputMultiplexer();
+            Gdx.input.setInputProcessor(inputMultiplexer);
+        }
         inputMultiplexer.addProcessor(layerMap.get(layerZ));
     }
 
@@ -171,5 +176,10 @@ public abstract class MultilayerScreen extends BaseScreen {
     }
     public void sendToBack(int Z){
         changeZ(Z,Z-1);
+    }
+    public void addLayer(int z, Layer2D layer2D){
+        if(layerMap==null)
+            layerMap=new TreeMap<Integer, Layer2D>();
+        layerMap.put(z,layer2D);
     }
 }

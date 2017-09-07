@@ -13,7 +13,7 @@ public class BalloonPop extends Game {
     @Override
     public void create() {
         ShaderProgram.pedantic=false;
-        setScreen(new MainMenu(this));
+        setScreen(new BalloonPopMultilayer(this));
     }
 
     @Override

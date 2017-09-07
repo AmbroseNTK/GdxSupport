@@ -97,8 +97,7 @@ public abstract class BaseScreen implements Screen, InputProcessor {
             totalTime+=delta;
             if(shaderStage.getBatch().getShader().isCompiled()){
                 shaderStage.getBatch().getShader().begin();
-                shaderStage.getBatch().getShader().setUniformf("time", totalTime);
-                shaderStage.getBatch().getShader().setUniformf("resolution", viewWidth,viewHeight);
+                passShaderUniforms(shaderStage.getBatch().getShader());
                 shaderStage.getBatch().getShader().end();
             }
             else
@@ -115,6 +114,15 @@ public abstract class BaseScreen implements Screen, InputProcessor {
 
         mainStage.draw();
         uiStage.draw();
+    }
+
+    /**
+     * Override to pass your uniforms to the shader program
+     * @param shaderProgram
+     */
+    public void passShaderUniforms(ShaderProgram shaderProgram){
+        shaderStage.getBatch().getShader().setUniformf("time", totalTime);
+        shaderStage.getBatch().getShader().setUniformf("resolution", viewWidth,viewHeight);
     }
     @Override
     public void resize(int width, int height) {

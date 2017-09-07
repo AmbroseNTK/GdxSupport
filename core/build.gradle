@@ -7,4 +7,5 @@ eclipse.project {
 }
 dependencies {
     compile project(':support')
+    compile 'org.jetbrains:annotations-java5:15.0'
 }

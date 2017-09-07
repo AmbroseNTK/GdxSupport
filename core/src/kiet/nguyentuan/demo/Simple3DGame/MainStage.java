@@ -2,28 +2,20 @@ package kiet.nguyentuan.demo.Simple3DGame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
-import com.badlogic.gdx.graphics.g3d.utils.FirstPersonCameraController;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
-import java.util.ArrayList;
-
-import graphics3d.BaseActor3D;
-import graphics3d.BaseScreen3D;
-import graphics3d.Stage3D;
+import kiet.nguyentuan.gdxsupport.graphics3D.BaseActor3D;
+import kiet.nguyentuan.gdxsupport.graphics3D.BaseScreen3D;
 import kiet.nguyentuan.gdxsupport.graphics2D.BaseActor;
 
 

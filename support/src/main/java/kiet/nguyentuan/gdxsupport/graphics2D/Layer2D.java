@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import kiet.nguyentuan.gdxsupport.Utils.ShaderParameters;
+
 /**
  * Created by kiettuannguyen on 28/07/2017.
  */
@@ -30,6 +32,11 @@ public class Layer2D extends Stage {
     public Layer2D(Viewport viewport){
         super(viewport);
         init();
+    }
+    public void passShaderUniforms(ShaderParameters shaderParameters){
+        getBatch().getShader().begin();
+        shaderParameters.passShaderUniforms(getBatch().getShader());
+        getBatch().getShader().end();
     }
 
     public boolean hasActor(){

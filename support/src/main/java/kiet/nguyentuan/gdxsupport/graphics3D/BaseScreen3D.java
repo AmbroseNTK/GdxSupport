@@ -1,4 +1,4 @@
-package graphics3d;
+package kiet.nguyentuan.gdxsupport.graphics3D;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
